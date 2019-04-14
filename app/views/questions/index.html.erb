@@ -8,11 +8,11 @@
           <th>Título de la pregnta</th>
           <th>Descripción</th>
         </tr>
-        <% @products.each do |product| %>
+        <% @questions.each do |product| %>
           <tr>
-            <td><%= product.id %></td>
-            <td><%= product.name %></td>
-            <td><%= product.description %></td>
+            <td><%= question.id %></td>
+            <td><%= question.title %></td>
+            <td><%= question.description %></td>
           </tr>
         <% end %>
       </table>
