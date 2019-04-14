@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 	post '/questions', to: 'questions#create'
 	get '/questions/:id', to: 'questions#show', as: 'question'
 	get '/questions/:id/edit', to: 'questions#edit'
+	patch '/questions/:id', to: 'questions#update'
 end
