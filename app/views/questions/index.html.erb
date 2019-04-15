@@ -1,35 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
-      <h1>Preguntas</h1>
-      <div class="text-right">
-        <% if signed_in? %>
-        <div class="text-right">
-          <%= link_to "Publicar Pregunta", new_question_path, class: "btn btn-primary" %>
+    <div class="col-sm-10 col-sm-offset-1">
+
+      <div class="questions">
+        <% @questions.each do |question| %>
+        <div class="question clearfix">
+          <div class="question-details">
+            <span class="question-title"><%= link_to question.title, question %></span>
+            <span class="question-description"><%= question.description %></span>
+          </div>
         </div>
         <% end %>
       </div>
-      <table class="table">
-        <tr>
-          <th>Id</th>
-          <th>Título de la pregunta</th>
-          <th>Descripción</th>
-          <th></th>
-        </tr>
-        <% @questions.each do |question| %>
-          <tr>
-            <td><%= question.id %></td>
-            <td><td><%= link_to question.title, question %></td></td>
-            <td><%= question.description %></td>
-            <td>
-              <% if signed_in? %>
-                <%= link_to "Editar", edit_question_path(question) %>
-                <%= link_to "Eliminar", question, method: :delete, data: { confirm: "¿Estás seguro de eliminar este pregunta?" } %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
     </div>
   </div>
 </div>
