@@ -1,0 +1,16 @@
+es:
+  errors:
+    messages:
+      blank: "no puede estar vacío"
+      invalid: "es inválido"
+      too_short: "demasiado corto"
+  activerecord:
+    attributes:
+      user:
+        name: "Nombre"
+        password: "Contraseña"
+        email: "Correo electrónico"
+      post:
+        title: "Título"
+        content: "Contenido"
+
