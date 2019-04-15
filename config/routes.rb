@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+	resources :users, only: [:new, :create]
+
 	root 'questions#index'
 	# get '/questions', to: 'questions#index'
 	# get '/questions/new', to: 'questions#new', as: 'new_question'
