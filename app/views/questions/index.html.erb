@@ -3,7 +3,11 @@
     <div class="col-sm-12">
       <h1>Preguntas</h1>
       <div class="text-right">
-        <%= link_to "Publicar Pregunta", new_question_path, class: "btn btn-primary" %>
+        <% if signed_in? %>
+        <div class="text-right">
+          <%= link_to "Publicar Pregunta", new_question_path, class: "btn btn-primary" %>
+        </div>
+        <% end %>
       </div>
       <table class="table">
         <tr>
@@ -18,8 +22,10 @@
             <td><td><%= link_to question.title, question %></td></td>
             <td><%= question.description %></td>
             <td>
-              <%= link_to "Editar", edit_question_path(question) %>
-              <%= link_to "Eliminar", question, method: :delete, data: { confirm: "¿Estás seguro de eliminar este pregunta?" } %>    
+              <% if signed_in? %>
+                <%= link_to "Editar", edit_question_path(question) %>
+                <%= link_to "Eliminar", question, method: :delete, data: { confirm: "¿Estás seguro de eliminar este pregunta?" } %>
+              <% end %>
             </td>
           </tr>
         <% end %>
