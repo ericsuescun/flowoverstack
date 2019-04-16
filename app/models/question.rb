@@ -1,8 +1,9 @@
 class Question < ApplicationRecord
 	belongs_to :user
 
-	has_many :comments
-	has_many :votes
+	has_many :comments, dependent: :destroy	#Los atrubutos dependen de que la pregunta exista
+	has_many :votes, dependent: :destroy
+	has_many :answers, dependent: :destroy
 	
 	validates :title, presence: true
 	validates :description, presence: true
