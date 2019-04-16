@@ -9,6 +9,10 @@
             <span class="question-title"><%= link_to question.title, question %></span>
             <span class="question-description"><%= question.description %></span>
           </div>
+          <div class="product-comments">
+            <span class="glyphicon glyphicon-comment"></span>
+            <span class="comment-count"><%= question.comments.count %></span>
+          </div>
         </div>
         <% end %>
       </div>

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 	root 'questions#index'
 
-	resources :questions
+	resources :questions do
+		resources :comments, only: [:create]
+	end
 
 	resources :users, only: [:new, :create]
 
