@@ -20,62 +20,15 @@
           <% end %>
         </div>
 
-        <div class="comments">
-          <h2>Comentarios para la pregunta</h2>
-          <% @question.comments.each do |comment| %>
-            <div class="panel panel-default">
-              <header class="panel-heading"><img src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="img-circle" /> <%= comment.user.name %></header>
-              <div class="panel-body"><%= comment.body %></div>
-            </div>
-          <% end %>
-          <% if signed_in? %>
-            <%= form_for [@question, Comment.new] do |f| %>
-              <div class="form-group">
-                <%= f.text_area :body, class: "form-control", placeholder: "Agregar comentario" %>
-              </div>
+        <%= render partial: "comments/comments", locals: {commentable: @question} %>
+        <%= render partial: "comments/form", locals: {commentable: @question} %>
 
-              <div class="actions text-right">
-                <%= f.submit "Comentar", class: "btn btn-primary" %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
+
 
         <div class="answers">
           <h2>Respuestas</h2>
-          <% @question.answers.each do |answer| %>
-            <div class="panel panel-default">
-              <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
-              <div class="panel-body"><%= answer.body %></div>
-              <p><%= answer.id %></p>
-            </div>
-
-            <div class="comments">
-              <h2>Comentarios para la respuesta</h2>
-              <% answer.comments.each do |comment| %>
-                <div class="panel panel-default">
-                  <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
-                  <div class="panel-body"><%= comment.body %></div>
-                </div>
-              <% end %>
-            </div>
-
-
-            <% if signed_in? %>
-
-
-              <%= form_tag( new_question_answer_comment_path, method: "get", class: "form_control") do %>
-                <%= hidden_field_tag(:answer_id, answer.id) %>
-                <%= text_field_tag(:body) %>
-                <%= submit_tag("Comentar respuesta") %>
-              <% end %>
-
-            <% end %>
-
-
-          <% end %>
-
-
+          
+          <%= render partial: "comments/comments", locals: {commentable: @answer} %>
 
           <% if signed_in? %>
             <%= form_for [@question, @question.answers.build] do |f| %>
