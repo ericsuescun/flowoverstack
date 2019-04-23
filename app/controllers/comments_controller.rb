@@ -1,15 +1,20 @@
 class CommentsController < ApplicationController
+	#Require authentication first!!!
 
 	def create
-	  question = Question.find(params[:question_id])
-	  question.comments.create(comments_params)
-
-	  redirect_to question
+	  @comment = @commentable.comments.new(comment_params)
+	  @comment.user = current_user
+	  @commentable.save
+	  # byebug
+	  if @commentable.kind_of?(Answer)
+	  	redirect_to question_path(@commentable.question), notice: "Comentario publicado!"
+	  else 
+	  	redirect_to @commentable, notice: "Comentario publicado!"
+	  end
 	end
 
 	private
-	  def comments_params
+	  def comment_params
 	    params.require(:comment).permit(:body).merge(user: current_user)
 	  end
-
 end

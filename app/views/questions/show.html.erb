@@ -20,35 +20,33 @@
           <% end %>
         </div>
 
-        <div class="comments">
-          <h2>Comentarios</h2>
-          <% @question.comments.each do |comment| %>
-            <div class="panel panel-default">
-              <header class="panel-heading"><img src="<%= Gravatar.new("#{comment.user.email}").image_url %>" class="img-circle" /> <%= comment.user.name %></header>
-              <div class="panel-body"><%= comment.body %></div>
-            </div>
-          <% end %>
+        <%= render partial: "comments/comments", locals: {commentable: @question} %>
+        <%= render partial: "comments/form", locals: {commentable: @question} %>
 
-          <% if signed_in? %>
-            <%= form_for [@question, @question.comments.build] do |f| %>
-              <div class="form-group">
-                <%= f.text_area :body, class: "form-control", placeholder: "Agregar comentario" %>
-              </div>
 
-              <div class="actions text-right">
-                <%= f.submit "Comentar", class: "btn btn-primary" %>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
 
         <div class="answers">
           <h2>Respuestas</h2>
+          
           <% @question.answers.each do |answer| %>
             <div class="panel panel-default">
               <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
               <div class="panel-body"><%= answer.body %></div>
             </div>
+
+            <%= render partial: "comments/comments", locals: {commentable: answer} %>
+
+
+            <% if signed_in? %>
+
+              <%= render partial: "comments/form", locals: {commentable: answer} %>
+
+
+
+
+            <% end %>
+
+
           <% end %>
 
           <% if signed_in? %>
@@ -56,14 +54,12 @@
               <div class="form-group">
                 <%= f.text_area :body, class: "form-control", placeholder: "Escribir respuesta" %>
               </div>
-
               <div class="actions text-right">
                 <%= f.submit "Enviar Respuesta", class: "btn btn-primary" %>
               </div>
             <% end %>
           <% end %>
         </div>
-
       </div>
     </div>
   </div>

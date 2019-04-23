@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: aomments
+#
+#  id         :integer          not null, primary key
+#  body       :text
+#  answer_id  :integer
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  answer: one
+  user: one
+
+two:
+  body: MyText
+  answer: two
+  user: two
