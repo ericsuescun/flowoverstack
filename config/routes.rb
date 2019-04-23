@@ -4,11 +4,12 @@ Rails.application.routes.draw do
 
 	resources :questions do
 		resource :vote, only: [:create, :destroy]
+		resources :answers
 		resources :comments, module: :questions	#This is to route to the specific controller for questions
-		
-		resources :answers do
-			resources :comments, module: :answers	#This is to route to the specific controller for answers
-		end
+	end
+
+	resources :answers do
+		resources :comments, module: :answers	#This is to route to the specific controller for answers
 	end
 
 	resources :users, only: [:new, :create]

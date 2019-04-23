@@ -28,7 +28,26 @@
         <div class="answers">
           <h2>Respuestas</h2>
           
-          <%= render partial: "comments/comments", locals: {commentable: @answer} %>
+          <% @question.answers.each do |answer| %>
+            <div class="panel panel-default">
+              <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
+              <div class="panel-body"><%= answer.body %></div>
+            </div>
+
+            <%= render partial: "comments/comments", locals: {commentable: answer} %>
+
+
+            <% if signed_in? %>
+
+              <%= render partial: "comments/form", locals: {commentable: answer} %>
+
+
+
+
+            <% end %>
+
+
+          <% end %>
 
           <% if signed_in? %>
             <%= form_for [@question, @question.answers.build] do |f| %>

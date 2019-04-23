@@ -5,7 +5,12 @@ class CommentsController < ApplicationController
 	  @comment = @commentable.comments.new(comment_params)
 	  @comment.user = current_user
 	  @commentable.save
-	  redirect_to @commentable, notice: "Comentario publicado!"
+	  # byebug
+	  if @commentable.kind_of?(Answer)
+	  	redirect_to question_path(@commentable.question), notice: "Comentario publicado!"
+	  else 
+	  	redirect_to @commentable, notice: "Comentario publicado!"
+	  end
 	end
 
 	private
