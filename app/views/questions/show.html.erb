@@ -34,6 +34,21 @@
               <div class="panel-body"><%= answer.body %></div>
             </div>
 
+            <% if answer.votes.exists?(user: current_user)  %>
+              <%= link_to answer_vote_path(answer), method: :delete, class: "question-upvote upvote-active" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= answer.votes.count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to answer_vote_path(answer), method: :post, class: "question-upvote" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= answer.votes.count %></span>
+              <% end %>
+            <% end %>
+            <% answer.votes.each do |vote| %>
+              <img src="<%= Gravatar.new("#{vote.user.email}").image_url %>" class="img-circle" />
+            <% end %>
+
             <%= render partial: "comments/comments", locals: {commentable: answer} %>
 
 
